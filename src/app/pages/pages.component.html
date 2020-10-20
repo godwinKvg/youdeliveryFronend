@@ -51,22 +51,28 @@
                     </button> 
                 </form>
             </div>  
-            <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">   
+           <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">   
+            
                 <div fxLayoutAlign="center center" [@.disabled]="true">
-                    <button mat-button [matMenuTriggerFor]="cartMenu" #cartMenuTrigger="matMenuTrigger" class="flex-row-button">
-                        <mat-icon class="mat-icon-lg">shopping_cart</mat-icon>
-                        <span *ngIf="appService.Data.totalCartCount > 0" class="cart-items-count">{{appService.Data.totalCartCount}}</span>
-                        <div fxLayout="column" fxLayoutAlign="center center" fxShow="false" fxShow.gt-xs class="top-cart">
-                            <span>Shopping Cart</span>
-                            <span *ngIf="appService.Data.totalCartCount > 0">
+                   <button mat-button [matMenuTriggerFor]="cartMenu" #cartMenuTrigger="matMenuTrigger" class="flex-row-button">
+                        
+                        <!--<span *ngIf="appService.Data.totalCartCount > 0" class="cart-items-count">{{appService.Data.totalCartCount}}</span>-->
+                      <!--   <div fxLayout="column" fxLayoutAlign="center center" fxShow="false" fxShow.gt-xs class="top-cart">
+                            <span>Reservez en ligne</span>
+                           <span *ngIf="appService.Data.totalCartCount > 0">
                                 <bdi>{{appService.Data.totalCartCount}} item<span *ngIf="appService.Data.totalCartCount > 1">s</span> - 
                                     $<span>{{appService.Data.totalPrice | number : '1.2-2'}}</span>
                                 </bdi>
                             </span>
-                        </div>
-                        <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
+                        
+                        </div>-->
+                     <!--   <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>-->
                     </button>
-                    <mat-menu #cartMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="top-menu-dropdown cart-dropdown">
+                    <a mat-button  routerLink="sign-in">
+                        <mat-icon class="mat-icon-lg">shopping_cart</mat-icon>
+                         <span fxShow="false" fxShow.gt-sm>Reservez en ligne</span> <!--<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>-->
+                    </a>
+                   <!--  <mat-menu #cartMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="top-menu-dropdown cart-dropdown">
                         <ng-template matMenuContent>
                             <span (mouseleave)="cartMenuTrigger.closeMenu()" class="d-block">
                                 <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
@@ -128,7 +134,7 @@
                                 </button> 
                             </form>
                         </ng-template>
-                    </mat-menu>
+                    </mat-menu>-->
                 </div> 
             </div> 
         </mat-toolbar-row>
@@ -136,7 +142,7 @@
 
 
  
-    <app-menu fxShow="false" fxShow.gt-sm></app-menu>  
+    <app-menu fxShow="false" fxShow.gt-sm></app-menu> 
 
     
     <div class="theme-container main"> 

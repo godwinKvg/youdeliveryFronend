@@ -1,6 +1,8 @@
 <mat-toolbar class="top-navbar mat-elevation-z2" fxLayoutAlign="center center">
-    <a mat-button routerLink="/" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Home</a>
-    <a mat-button [matMenuTriggerFor]="menu" (click)="openMegaMenu()">Fashion<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+    <a mat-button routerLink="/" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Acceuil</a>
+    <a mat-button routerLink="/" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">APropos</a>
+
+    <!-- <a mat-button [matMenuTriggerFor]="menu" (click)="openMegaMenu()">Fashion<mat-icon class="caret">arrow_drop_down</mat-icon></a>
     <mat-menu #menu="matMenu" [overlapTrigger]="false" class="mega-menu app-dropdown">
         <div fxLayout="row wrap">
             <div fxFlex="20" fxLayout="column" class="p-1"> 
@@ -49,11 +51,11 @@
         </div>
            
     </mat-menu>
-    
-    <a mat-button [routerLink]="['/products', 'jewellery']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Jewellery</a>
-    <a mat-button [routerLink]="['/products', 'electronics']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Electronics</a>
-    <a mat-button [routerLink]="['/products', 'sports']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Sports</a>
-    <!-- <a mat-button [routerLink]="['/products', 'motors']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Motors</a> -->
+    -->
+    <a mat-button [routerLink]="['/products', 'jewellery']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Services</a>
+    <a mat-button [routerLink]="['/products', 'electronics']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Nos Partenaires</a>
+  <!--  <a mat-button [routerLink]="['/products', 'sports']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Sports</a>
+     <a mat-button [routerLink]="['/products', 'motors']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Motors</a> 
 
     <a mat-button [matMenuTriggerFor]="animals">Pages<mat-icon class="caret">arrow_drop_down</mat-icon></a>
     <mat-menu #animals="matMenu" [overlapTrigger]="false" class="app-dropdown"> 
@@ -72,9 +74,9 @@
         <a mat-menu-item>Menu item</a>
         <a mat-menu-item>Menu item</a>
     </mat-menu>
-    
+    -->
     <a mat-button routerLink="/contact" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Contact</a>
-    <a mat-button routerLink="/admin" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Admin Panel</a>
+   <!-- <a mat-button routerLink="/admin" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Admin Panel</a>-->
 
 </mat-toolbar>
 
