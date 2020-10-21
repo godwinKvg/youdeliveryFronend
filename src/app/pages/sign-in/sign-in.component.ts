@@ -18,13 +18,16 @@ export class SignInComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-
+  role: string;
   constructor(public formBuilder: FormBuilder, public router:Router, public snackBar: MatSnackBar,private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      localStorage.setItem('isLoggedInClient',"false");
+      localStorage.setItem('isLoggedInAdmin',"false");
+      localStorage.setItem('isLoggedPartenaire',"false");
     }
     this.loginForm = this.formBuilder.group({
       'email': ['', Validators.compose([Validators.required, emailValidator])],
@@ -52,11 +55,27 @@ export class SignInComponent implements OnInit {
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
+        this.roles = this.tokenStorage.getUser().roles;
         console.log(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.router.navigate(['/account'])
+        localStorage.setItem('role',data.roles[0]);
+        
+        switch (data.roles[0]) {
+          case "CLIENT_ROLE":
+            localStorage.setItem('isLoggedInClient',"true");
+            this.router.navigate(['/account']);
+            break;
+          case "LIVREUR_ROLE":
+            localStorage.setItem('isLoggedInAdmin',"true");
+            this.router.navigate(['/admin']);
+              break;
+          default:
+            localStorage.setItem('isLoggedInPartenaire',"true");
+            this.router.navigate(['/partenaire'])
+            break;
+        }
+        
       },
       err => {
         this.errorMessage = err.error.message;

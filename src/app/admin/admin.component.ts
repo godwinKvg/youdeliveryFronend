@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { AppSettings, Settings } from '../app.settings';
 import { Router, NavigationEnd } from '@angular/router'; 
 import { MenuService } from './components/menu/menu.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -10,17 +11,20 @@ import { MenuService } from './components/menu/menu.service';
 })
 export class AdminComponent implements OnInit {
   @ViewChild('sidenav') sidenav:any;  
+  currentUser :any;
   public userImage = 'assets/images/others/admin.jpg'; 
   public settings:Settings;
   public menuItems:Array<any>;
   public toggleSearchBar:boolean = false;
   constructor(public appSettings:AppSettings, 
               public router:Router,
-              private menuService: MenuService){        
+              private menuService: MenuService,
+              private token: TokenStorageService){        
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {  
+    this.currentUser = this.token.getUser();
     if(window.innerWidth <= 960){ 
       this.settings.adminSidenavIsOpened = false;
       this.settings.adminSidenavIsPinned = false;

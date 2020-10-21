@@ -3,13 +3,15 @@ import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 
 import { PagesComponent } from './pages/pages.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AuthGuardClientService } from './_services/auth-guard-client.service';
+import { AuthGuardAdminService } from './_services/auth-guard-admin.service';
 
 export const routes: Routes = [
     { 
         path: '', 
         component: PagesComponent, children: [
             { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-            { path: 'account', loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule), data: { breadcrumb: 'Account Settings' } },
+            { path: 'account', loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule), data: { breadcrumb: 'Account Settings' },canActivate: [AuthGuardClientService] },
             { path: 'compare', loadChildren: () => import('./pages/compare/compare.module').then(m => m.CompareModule), data: { breadcrumb: 'Compare' } },
             { path: 'wishlist', loadChildren: () => import('./pages/wishlist/wishlist.module').then(m => m.WishlistModule), data: { breadcrumb: 'Wishlist' } },
             { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule), data: { breadcrumb: 'Cart' } },
@@ -21,7 +23,7 @@ export const routes: Routes = [
         ]
     },
     { path: 'landing', loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule) },
-    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),canActivate: [AuthGuardAdminService]  },
     { path: '**', component: NotFoundComponent }
 ];
 

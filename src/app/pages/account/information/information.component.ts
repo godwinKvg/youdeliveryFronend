@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { emailValidator, matchingPasswords } from '../../../theme/utils/app-validators';
 
 @Component({
@@ -11,13 +12,15 @@ import { emailValidator, matchingPasswords } from '../../../theme/utils/app-vali
 export class InformationComponent implements OnInit {
   infoForm: FormGroup;
   passwordForm: FormGroup;
-  constructor(public formBuilder: FormBuilder, public snackBar: MatSnackBar) { }
+  currentUser: any;
+  constructor(public formBuilder: FormBuilder, public snackBar: MatSnackBar, private token: TokenStorageService) { }
 
   ngOnInit() {
+    this.currentUser = this.token.getUser();
     this.infoForm = this.formBuilder.group({
-      'firstName': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'lastName': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'email': ['', Validators.compose([Validators.required, emailValidator])]
+      'fullname': [this.currentUser.fullname, Validators.compose([Validators.required, Validators.minLength(3)])],
+      'phoneNumber': [this.currentUser.phoneNumber, Validators.compose([Validators.required, Validators.minLength(9)])],
+      'username': [this.currentUser.username, Validators.compose([Validators.required, emailValidator])]
     });
 
     this.passwordForm = this.formBuilder.group({

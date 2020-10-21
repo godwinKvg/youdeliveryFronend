@@ -21,7 +21,11 @@ import { BreadcrumbComponent } from './theme/components/breadcrumb/breadcrumb.co
 
 import { AppSettings } from './app.settings';
 import { AppService } from './app.service';
-import{ AuthService } from './_services/auth.service';
+import { AuthService } from './_services/auth.service';
+import { AuthGuardClientService } from './_services/auth-guard-client.service';
+import { AuthGuardAdminService } from './_services/auth-guard-admin.service';
+import { AuthGuardPartenaireService } from './_services/auth-guard-partenaire.service';
+
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { TokenStorageService } from './_services/token-storage.service';
 import { AppInterceptor } from './theme/utils/app-interceptor';
@@ -57,6 +61,9 @@ import { FooterComponent } from './theme/components/footer/footer.component';
     AppService,
     AuthService,
     TokenStorageService,
+    AuthGuardClientService,
+    AuthGuardAdminService,
+    AuthGuardPartenaireService,
     AuthInterceptor,
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: MAT_MENU_SCROLL_STRATEGY, useFactory: menuScrollStrategy, deps: [Overlay] },
