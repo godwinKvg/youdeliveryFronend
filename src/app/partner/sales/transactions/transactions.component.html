@@ -6,12 +6,12 @@
         <mat-divider></mat-divider>
         <div class="mat-table admin-table">
             <div class="mat-header-row">
-                <div class="mat-header-cell">OrderId</div>
-                <div class="mat-header-cell">TransactionId</div>
-                <div class="mat-header-cell">Date</div>
-                <div class="mat-header-cell">Payment Method</div>
-                <div class="mat-header-cell">Status</div>
-                <div class="mat-header-cell">Amount</div>
+                <div class="mat-header-cell">ID COMMANDE</div>
+                <div class="mat-header-cell">ID TRANSACTION</div>
+                <div class="mat-header-cell">DATE</div>
+                <div class="mat-header-cell">Methode de Payement</div>
+                <div class="mat-header-cell">STATUT</div>
+                <div class="mat-header-cell">MONTANT</div>
                 <div class="mat-header-cell"></div>
             </div>
             <div *ngFor="let tran of transactions | paginate: { itemsPerPage: count, currentPage: page }" class="mat-row">

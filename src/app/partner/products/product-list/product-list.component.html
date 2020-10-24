@@ -18,8 +18,8 @@
             </div>                            
             <div class="divider mt-2"></div>
             <div class="icons">
-                <a [routerLink]="['/admin/products/add-product', product.id]" mat-mini-fab color="primary" matTooltip="Edit"><mat-icon>edit</mat-icon></a>
-                <span class="px-1"> <a [routerLink]="['/admin/products/product-detail', product.id]" mat-mini-fab color="primary" matTooltip="View"><mat-icon>remove_red_eye</mat-icon></a></span>
+                <a [routerLink]="['/partner/products/add-product', product.id]" mat-mini-fab color="primary" matTooltip="Edit"><mat-icon>edit</mat-icon></a>
+                <span class="px-1"> <a [routerLink]="['/partner/products/product-detail', product.id]" mat-mini-fab color="primary" matTooltip="View"><mat-icon>remove_red_eye</mat-icon></a></span>
                 <button mat-mini-fab color="warn" matTooltip="Remove" (click)="remove(product)"><mat-icon>delete</mat-icon></button> 
             </div>
         </mat-card>
