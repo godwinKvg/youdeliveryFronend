@@ -72,7 +72,7 @@ export class SignInComponent implements OnInit {
               break;
           default:
             localStorage.setItem('isLoggedInPartenaire',"true");
-            this.router.navigate(['/partenaire'])
+            this.router.navigate(['/partner'])
             break;
         }
         

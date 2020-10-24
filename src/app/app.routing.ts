@@ -5,6 +5,7 @@ import { PagesComponent } from './pages/pages.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthGuardClientService } from './_services/auth-guard-client.service';
 import { AuthGuardAdminService } from './_services/auth-guard-admin.service';
+import { AuthGuardPartenaireService } from './_services/auth-guard-partenaire.service';
 
 export const routes: Routes = [
     { 
@@ -15,7 +16,7 @@ export const routes: Routes = [
             { path: 'compare', loadChildren: () => import('./pages/compare/compare.module').then(m => m.CompareModule), data: { breadcrumb: 'Compare' } },
             { path: 'wishlist', loadChildren: () => import('./pages/wishlist/wishlist.module').then(m => m.WishlistModule), data: { breadcrumb: 'Wishlist' } },
             { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule), data: { breadcrumb: 'Cart' } },
-           /*< { path: 'checkout', loadChildren: () => import('./pages/account/checkout/checkout.module').then(m => m.CheckoutModule), data: { breadcrumb: 'Checkout' } },*/
+           /* { path: 'checkout', loadChildren: () => import('./pages/account/checkout/checkout.module').then(m => m.CheckoutModule), data: { breadcrumb: 'Checkout' } },*/
             { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule), data: { breadcrumb: 'Contact' } },
             { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInModule), data: { breadcrumb: 'Sign In ' } },
             { path: 'brands', loadChildren: () => import('./pages/brands/brands.module').then(m => m.BrandsModule), data: { breadcrumb: 'Brands' } },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     },
     { path: 'landing', loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule) },
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),canActivate: [AuthGuardAdminService]  },
+    { path: 'partner', loadChildren: () => import('./partner/partner.module').then(m => m.PartnerModule) },
     { path: '**', component: NotFoundComponent }
 ];
 
