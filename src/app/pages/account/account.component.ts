@@ -13,7 +13,8 @@ export class AccountComponent implements OnInit {
     { name: 'Tableau de bord ', href: 'dashboard', icon: 'dashboard' },
     { name: 'Informations du compte', href: 'information', icon: 'info' },
     { name: 'Addresses', href: 'addresses', icon: 'location_on' },
-    { name: 'Passer une commande', href: 'orders', icon: 'shopping_cart' }, 
+    { name: 'Envoi de colis', href: 'checkout', icon: 'shopping_cart' }, 
+    { name: 'Livrer chez moi', href: 'commande', icon: 'shopping_basket' }, 
     { name: 'Historiques des commandes', href: 'orders', icon: 'add_shopping_cart' },  
     { name: 'Déconnecter', href: '/sign-in', icon: 'power_settings_new' },    
   ];

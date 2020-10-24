@@ -1,0 +1,484 @@
+<mat-horizontal-stepper #horizontalStepper linear="true" class="mat-elevation-z2" fxShow="false" fxShow.gt-sm>
+  <mat-step [stepControl]="billingForm" label="Expéditeur">
+    <form [formGroup]="billingForm">     
+      <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom complet</mat-label>
+              <input matInput  formControlName="fullname" required>
+          </mat-form-field>
+        </div>
+      
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput  formControlName="username" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone</mat-label>
+              <input matInput  formControlName="phoneNumber" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ville</mat-label>
+            <mat-select placeholder="Ville" formControlName="city" required>
+              <mat-option *ngFor="let country of countries" [value]="country">
+                  {{country.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="billingForm.controls.city.errors?.required">La ville est obligatoire </mat-error>
+          </mat-form-field>
+        </div>
+     
+        <div fxFlex="100" fxFlex.gt-sm="60" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Addresse</mat-label>
+              <input matInput placeholder="Addresse (Rue, appartement, suite, unit etc.)" formControlName="address" required>
+              <mat-error *ngIf="billingForm.controls.address.errors?.required">L'adresse est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>navigate_next</mat-icon></button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="recipientForm" label="Destinataire">
+    <form [formGroup]="recipientForm" class="p-2">
+      <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom complet</mat-label>
+              <input matInput placeholder="Nom complet" formControlName="fullname" required>
+              <mat-error *ngIf="recipientForm.controls.fullname.errors?.required">Veuillez entré le nom complet</mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="username" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone</mat-label>
+              <input matInput placeholder="Téléphone" formControlName="phoneNumber" required>
+              <mat-error *ngIf="recipientForm.controls.phoneNumber.errors?.required">Le numéro est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ville</mat-label>
+            <mat-select placeholder="Country" formControlName="city" required>
+              <mat-option *ngFor="let country of countries" [value]="country">
+                  {{country.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="recipientForm.controls.city.errors?.required">La ville est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+     
+        <div fxFlex="100" fxFlex.gt-sm="60" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Addresse</mat-label>
+              <input matInput placeholder="Address (Rue, appartement, suite, unit etc.)" formControlName="address" required>
+              <mat-error *ngIf="recipientForm.controls.address.errors?.required">Addresse est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>navigate_before</mat-icon></button>
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>navigate_next</mat-icon></button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="paymentForm" label="Information du colis">
+    <form [formGroup]="paymentForm">
+      <div fxLayout="row wrap">      
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Type de colis</mat-label>
+              <mat-select placeholder="Expired month" formControlName="type" required>
+                <mat-option *ngFor="let type of typesColis" [value]="type">
+                    {{type}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="paymentForm.controls.type.errors?.required">Entrer le type de colis</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Poids</mat-label>
+              <mat-select placeholder="Expired month" formControlName="poids" required>
+                <mat-option *ngFor="let p of poids" [value]="p">
+                    {{p}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="paymentForm.controls.poids.errors?.required">Précisez le poids</mat-error>
+          </mat-form-field>
+        </div>
+        <mat-radio-group formControlName="deliveryMethode" fxLayout="column" fxLayoutAlign="center" required name="methods">
+         <mat-radio-button *ngFor="let method of deliveryMethods" color="primary" [value]="method" class="mt-1"><b>{{method.name}}</b> {{method.desc}}</mat-radio-button>
+        </mat-radio-group> 
+        
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Commentaire</mat-label>
+              <input  matInput placeholder="Votre commentaire" formControlName="commentaire" >
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>navigate_before</mat-icon></button>
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>navigate_next</mat-icon></button>       
+      </div>
+    </form>
+  </mat-step>
+  <mat-step label="Review Order">    
+    <div fxLayout="row wrap">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted">Informations du colis</h3>
+        <div class="divider"></div>
+        <div class="mat-table review-order-table">
+          <div class="mat-header-row">
+            <div class="mat-header-cell">Type de colis</div>
+            <div class="mat-header-cell">Poids</div>
+            <div class="mat-header-cell">Methode de livraison</div>      
+            <div class="mat-header-cell">Commentaire</div>
+          </div>
+          <div  class="mat-row">
+            <div class="mat-cell">{{paymentForm.controls.type.value}}</div>
+            <div class="mat-cell">{{paymentForm.controls.poids.value}}</div>
+            <div class="mat-cell"><p class="py-1">{{paymentForm.controls.deliveryMethode.value['name']}} <span class="text-muted">{{paymentForm.controls.deliveryMethode.value['desc']}}</span></p>
+            </div>      
+            <div class="mat-cell text-muted"> {{paymentForm.controls.commentaire.value}} </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted mt-2">Informations Expéditeur </h3>
+        <div class="divider"></div>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Nom complet:</p>
+        <p>{{billingForm.controls.fullname.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Email:</p>
+        <p>{{billingForm.controls.username.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Téléphone:</p>
+        <p>{{billingForm.controls.phoneNumber.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Ville:</p>
+        <p>{{billingForm.controls.city.value['name']}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Addresse:</p>
+        <p>{{billingForm.controls.address.value}}</p>
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted mt-2">Informations destinataire</h3>
+        <div class="divider"></div>
+      </div>
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+          <p class="text-muted">Nom complet:</p>
+          <p>{{recipientForm.controls.fullname.value}}</p>
+        </div>
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+          <p class="text-muted">Email:</p>
+          <p>{{recipientForm.controls.username.value}}</p>
+        </div>
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+          <p class="text-muted">Téléphone:</p>
+          <p>{{recipientForm.controls.phoneNumber.value}}</p>
+        </div>
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+          <p class="text-muted">Ville:</p>
+          <p>{{recipientForm.controls.city.value['name']}}</p>
+        </div>
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+          <p class="text-muted">Addresse:</p>
+          <p>{{recipientForm.controls.address.value}}</p>
+        </div>      
+    </div>
+    <div fxLayout="row">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted mt-2">Payment information</h3>
+        <div class="divider"></div>
+        <p class="py-1"><span class="text-muted mr-1">Card number:</span><span>XXX-XXX-XXX-7224</span></p>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1"> 
+       <h2><span class="text-muted mr-1">Prix Total:</span><span>{{grandTotal | number : '1.2-2'}}FCF</span></h2>    
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+      <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>navigate_before</mat-icon></button>
+      <button mat-raised-button matStepperNext color="primary" (click)="placeOrder()">Confirmer</button>       
+    </div>     
+  </mat-step>
+  <mat-step label="Confirmation">
+    <div fxLayout="column" fxLayoutAlign="center center" class="p-2 text-center"> 
+      <button mat-fab color="primary"><mat-icon>check</mat-icon></button>
+      <h2 class="py-2">Congratulation! Your order has been processed</h2>
+      <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus dolor ante, ut luctus mi faucibus a. Ut eu tincidunt neque. Proin porttitor id ligula id placerat. Integer nec nulla varius, dapibus libero quis, semper eros. Aliquam erat volutpat. Proin volutpat tellus vel purus interdum euismod.</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+      <a [routerLink]="['/account']" mat-raised-button color="primary">Mon compte</a>       
+    </div>
+     
+  </mat-step>
+</mat-horizontal-stepper>
+
+<mat-vertical-stepper #verticalStepper linear="true" class="mat-elevation-z2" fxHide="false" fxHide.gt-sm>
+  <mat-step [stepControl]="billingForm" label="Expéditeur">
+    <form [formGroup]="billingForm">     
+      <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom complet</mat-label>
+              <input matInput  formControlName="fullname" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput  formControlName="username" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone</mat-label>
+              <input matInput  formControlName="phoneNumber" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ville</mat-label>
+            <mat-select placeholder="Ville" formControlName="city" required>
+              <mat-option *ngFor="let country of countries" [value]="country">
+                  {{country.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="billingForm.controls.city.errors?.required">La ville est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div fxFlex="100" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Addresse</mat-label>
+              <input matInput placeholder="Address (Rue, appartement, suite, unit etc.)" formControlName="address" required>
+              <mat-error *ngIf="billingForm.controls.address.errors?.required">Addresse est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>expand_more</mat-icon></button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="recipientForm" label="Destinataire">
+    <form [formGroup]="recipientForm" class="p-2">
+      <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nom complet</mat-label>
+              <input matInput placeholder="Nom complet" formControlName="fullname" required>
+              <mat-error *ngIf="recipientForm.controls.fullname.errors?.required">Nom est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="username" required>
+              <mat-error *ngIf="recipientForm.controls.username.errors?.required">Email est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Téléphone</mat-label>
+              <input matInput placeholder="Téléphone" formControlName="phoneNumber" required>
+              <mat-error *ngIf="recipientForm.controls.phoneNumber.errors?.required">Numéro est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ville</mat-label>
+            <mat-select placeholder="Country" formControlName="city" required>
+              <mat-option *ngFor="let country of countries" [value]="country">
+                  {{country.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="recipientForm.controls.city.errors?.required">Ville est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div fxFlex="100" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Addresse</mat-label>
+              <input matInput placeholder="Address (Rue, appartement, suite, unit etc.)" formControlName="address" required>
+              <mat-error *ngIf="recipientForm.controls.address.errors?.required">Addresse est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+   
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>expand_less</mat-icon></button>
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>expand_more</mat-icon></button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="paymentForm" label="Informations du colis">
+    <form [formGroup]="paymentForm">
+      <div fxLayout="row wrap">      
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Type de colis</mat-label>
+              <mat-select placeholder="type de colis" formControlName="type" required>
+                <mat-option *ngFor="let type of typesColis" [value]="type">
+                    {{type}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="paymentForm.controls.type.errors?.required">Type de colis est obligatoire</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Poids</mat-label>
+              <mat-select placeholder="Poids" formControlName="poids" required>
+                <mat-option *ngFor="let p of poids" [value]="p">
+                    {{p}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="paymentForm.controls.poids.errors?.required">Précisez le poids</mat-error>
+          </mat-form-field>
+        </div>
+        <mat-radio-group formControlName="deliveryMethode" fxLayout="column" fxLayoutAlign="center" required name="methods">
+         <mat-radio-button *ngFor="let method of deliveryMethods" color="primary" [value]="method" class="mt-1"><b>{{method.name}}</b> {{method.desc}}</mat-radio-button>
+        </mat-radio-group> 
+        
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Commentaire</mat-label>
+              <input matInput placeholder="Votre commentaire" formControlName="commentaire" >
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>expand_less</mat-icon></button>
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>expand_more</mat-icon></button>       
+      </div>
+    </form>
+  </mat-step>
+  <mat-step label="Review Order">    
+    <div fxLayout="row wrap">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted">Informations du colis</h3>
+        <div class="divider"></div>
+        <div class="mat-table review-order-table">
+          <div class="mat-header-row">
+            <div class="mat-header-cell">Type de colis</div>
+            <div class="mat-header-cell">Poids</div>
+            <div class="mat-header-cell">Methode de livraison</div>      
+            <div class="mat-header-cell">Commentaire</div>
+          </div>
+          <div  class="mat-row">
+            <div class="mat-cell">{{paymentForm.controls.type.value}}</div>
+            <div class="mat-cell">{{paymentForm.controls.poids.value}}</div>
+            <div class="mat-cell"><p class="py-1">{{paymentForm.controls.deliveryMethode.value['name']}} <span class="text-muted">{{paymentForm.controls.deliveryMethode.value['desc']}}</span></p>
+            </div>      
+            <div class="mat-cell text-muted"> {{paymentForm.controls.commentaire.value}} </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted mt-2">Expéditeur</h3>
+        <div class="divider"></div>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Nom complet:</p>
+        <p>{{billingForm.controls.fullname.value}} </p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Email:</p>
+        <p>{{billingForm.controls.username.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Téléphone:</p>
+        <p>{{billingForm.controls.phoneNumber.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Ville:</p>
+        <p>{{billingForm.controls.city.value['name']}}</p>
+      </div>
+      
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Addresse:</p>
+        <p>{{billingForm.controls.address.value}}</p>
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted mt-2">Destinataire</h3>
+        <div class="divider"></div>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Nom complet:</p>
+        <p>{{recipientForm.controls.fullname.value}} </p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Email:</p>
+        <p>{{recipientForm.controls.username.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Téléphone:</p>
+        <p>{{recipientForm.controls.phoneNumber.value}}</p>
+      </div>
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Ville:</p>
+        <p>{{recipientForm.controls.city.value['name']}}</p>
+      </div>
+      
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
+        <p class="text-muted">Addresse:</p>
+        <p>{{recipientForm.controls.address.value}}</p>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div fxFlex="100" class="p-1">
+        <h3 class="text-muted mt-2">Payment information</h3>
+        <div class="divider"></div>
+        <p class="py-1"><span class="text-muted mr-1">Card number:</span><span>XXX-XXX-XXX-7224</span></p>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1"> 
+       <h2><span class="text-muted mr-1">Total Price:</span><span>{{grandTotal | number : '1.2-2'}}FCF</span></h2>    
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+      <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>expand_less</mat-icon></button>
+      <button mat-raised-button matStepperNext color="primary" (click)="placeOrder()">Place order now</button>       
+    </div>     
+  </mat-step>
+  <mat-step label="Confirmation">
+    <div fxLayout="column" fxLayoutAlign="center center" class="p-2 text-center"> 
+      <button mat-fab color="primary"><mat-icon>check</mat-icon></button>
+      <h2 class="py-2">Congratulation! Your order has been processed</h2>
+      <p class="text-muted lh">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus dolor ante, ut luctus mi faucibus a. Ut eu tincidunt neque. Proin porttitor id ligula id placerat. Integer nec nulla varius, dapibus libero quis, semper eros. Aliquam erat volutpat. Proin volutpat tellus vel purus interdum euismod.</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+      <a [routerLink]="['/']" mat-raised-button color="primary">Return to Shop</a>       
+    </div>     
+  </mat-step>
+</mat-vertical-stepper>

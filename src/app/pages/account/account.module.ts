@@ -8,7 +8,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformationComponent } from './information/information.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { OrdersComponent } from './orders/orders.component';
-
+import { CheckoutComponent } from './checkout/checkout.component';
+import { CommandeComponent } from './commande/commande.component';
 export const routes = [
   { 
       path: '', 
@@ -17,7 +18,9 @@ export const routes = [
           { path: 'dashboard', component: DashboardComponent, data: {  breadcrumb: 'Dashboard' } },
           { path: 'information', component: InformationComponent, data: {  breadcrumb: 'Information' } },
           { path: 'addresses', component: AddressesComponent, data: {  breadcrumb: 'Addresses' } },
-          { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } }
+          { path: 'checkout', component: CheckoutComponent, data: {  breadcrumb: 'Checkout' } },
+          { path: 'commande', component: CommandeComponent, data: {  breadcrumb: 'Commande' } },
+          { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orde' } }
       ]
   }
 ];
@@ -34,7 +37,9 @@ export const routes = [
     DashboardComponent,
     InformationComponent,
     AddressesComponent,
-    OrdersComponent
+    OrdersComponent,
+    CheckoutComponent,
+    CommandeComponent
   ]
 })
 export class AccountModule { }

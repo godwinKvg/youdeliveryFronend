@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { Data, AppService } from '../../app.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  selector: 'app-commande',
+  templateUrl: './commande.component.html',
+  styleUrls: ['./commande.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CommandeComponent implements OnInit {
+
   @ViewChild('horizontalStepper', { static: true }) horizontalStepper: MatStepper;
   @ViewChild('verticalStepper', { static: true }) verticalStepper: MatStepper;
   billingForm: FormGroup;

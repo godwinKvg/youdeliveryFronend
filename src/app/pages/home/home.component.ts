@@ -10,7 +10,7 @@ import { Product } from "../../app.models";
 export class HomeComponent implements OnInit {
 
   public slides = [
-    { title: 'Se liberer ', subtitle: 'de certaines taches ', image: 'assets/images/carousel/banner0.jpg' },
+    { title: 'Se liberer ', subtitle: 'de certaines taches ', image: 'assets/images/carousel/banner1.jpg' },
     { title: 'Etre ponctuel', subtitle: 'malgre tout', image: 'assets/images/carousel/banner2.jpg' },
     { title: 'Respecter', subtitle: 'La parole donnée', image: 'assets/images/carousel/banner3.jpg' },
     { title: 'Redjoindre les siens', subtitle: 'En toute Confiance', image: 'assets/images/carousel/banner4.jpg' },

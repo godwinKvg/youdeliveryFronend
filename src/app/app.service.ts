@@ -125,10 +125,10 @@ export class AppService {
 
     public getCountries(){
         return [ 
-            {name: 'Afghanistan', code: 'AF'}, 
-            {name: 'Aland Islands', code: 'AX'}, 
-            {name: 'Albania', code: 'AL'}, 
-            {name: 'Algeria', code: 'DZ'}, 
+            {name: 'Dakar', code: 'DK'}, 
+            {name: 'Diourbel', code: 'DL'}, 
+            {name: 'Thies', code: 'TH'}, 
+            {name: 'Fatick', code: 'FK'}, 
             {name: 'American Samoa', code: 'AS'}, 
             {name: 'AndorrA', code: 'AD'}, 
             {name: 'Angola', code: 'AO'}, 
@@ -388,8 +388,19 @@ export class AppService {
         ]
     }
 
+    public getTypeColis(){
+        return [
+            "Marchandise",
+            "Nourriture",
+            "Animale" ]
+    }
+
+    public getPoids(){
+        return ["1 kg", "2 kg","3 kg","4 kg","5 kg","6 kg","7 kg","8 kg","9 kg","10 kg","11 kg"]
+    }
+
     public getYears(){
-        return ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" ]
+        return [ "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" ]
     }
 
     public getDeliveryMethods(){
