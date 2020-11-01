@@ -67,13 +67,13 @@ export class ControlsComponent implements OnInit {
     }
   }
 
-  public addToCompare(product:Product){
+  /*public addToCompare(product:Product){
     this.appService.addToCompare(product);
   }
 
   public addToWishList(product:Product){
     this.appService.addToWishList(product);
-  }
+  }*/
 
   public addToCart(product:Product){
     // console.log(product)

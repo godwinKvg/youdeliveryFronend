@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { AppService } from 'src/app/app.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-commande',
@@ -20,10 +21,11 @@ export class CommandeComponent implements OnInit {
   years = [];
   deliveryMethods = [];
   grandTotal = 0;
-
-  constructor(public appService:AppService, public formBuilder: FormBuilder) { }
+  currentUser: any;
+  constructor(public appService:AppService, public formBuilder: FormBuilder,private token: TokenStorageService) { }
 
   ngOnInit() {    
+    this.currentUser = this.token.getUser();
     this.appService.Data.cartList.forEach(product=>{
       this.grandTotal += product.cartCount*product.newPrice;
     });
@@ -32,16 +34,10 @@ export class CommandeComponent implements OnInit {
     this.years = this.appService.getYears();
     this.deliveryMethods = this.appService.getDeliveryMethods();
     this.billingForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      middleName: '',
-      company: '',
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-      country: ['', Validators.required],
+      fullname: [ this.currentUser.fullname, Validators.required],
+      username: [this.currentUser.username, Validators.required],
+      phoneNumber: [this.currentUser.phoneNumber, Validators.required],
       city: ['', Validators.required],
-      state: '',
-      zip: ['', Validators.required],
       address: ['', Validators.required]
     });
     this.deliveryForm = this.formBuilder.group({

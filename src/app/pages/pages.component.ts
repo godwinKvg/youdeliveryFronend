@@ -15,6 +15,7 @@ export class PagesComponent implements OnInit {
   public showBackToTop:boolean = false; 
   public categories:Category[];
   public category:Category;
+  public isLoggedInClient:boolean = false;
   public sidenavMenuItems:Array<any>;
   @ViewChild('sidenav', { static: true }) sidenav:any;
 
@@ -29,6 +30,11 @@ export class PagesComponent implements OnInit {
   ngOnInit() {
     this.getCategories();
     this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
+    if(localStorage.getItem('isLoggedInClient')== "true"){
+       this.isLoggedInClient = true;
+       console.log("loy def fi mory "+ localStorage.getItem('isLoggedInClient'));
+
+    }
   } 
 
   public getCategories(){    

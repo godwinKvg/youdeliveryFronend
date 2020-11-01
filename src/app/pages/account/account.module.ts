@@ -18,7 +18,7 @@ export const routes = [
           { path: 'dashboard', component: DashboardComponent, data: {  breadcrumb: 'Dashboard' } },
           { path: 'information', component: InformationComponent, data: {  breadcrumb: 'Information' } },
           { path: 'addresses', component: AddressesComponent, data: {  breadcrumb: 'Addresses' } },
-          { path: 'checkout', component: CheckoutComponent, data: {  breadcrumb: 'Checkout' } },
+          { path: 'checkout', component: CheckoutComponent, data: {  breadcrumb: 'Passer une commande' } },
           { path: 'commande', component: CommandeComponent, data: {  breadcrumb: 'Commande' } },
           { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orde' } }
       ]

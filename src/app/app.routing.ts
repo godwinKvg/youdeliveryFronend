@@ -17,6 +17,8 @@ export const routes: Routes = [
             { path: 'wishlist', loadChildren: () => import('./pages/wishlist/wishlist.module').then(m => m.WishlistModule), data: { breadcrumb: 'Wishlist' } },
             { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule), data: { breadcrumb: 'Cart' } },
            /* { path: 'checkout', loadChildren: () => import('./pages/account/checkout/checkout.module').then(m => m.CheckoutModule), data: { breadcrumb: 'Checkout' } },*/
+            { path: 'services', loadChildren: () => import('./pages/service/service.module').then(m => m.ServiceModule), data: { breadcrumb: 'Nos Services' } },
+            { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule), data: { breadcrumb: 'A Propos' } },
             { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule), data: { breadcrumb: 'Contact' } },
             { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInModule), data: { breadcrumb: 'Sign In ' } },
             { path: 'brands', loadChildren: () => import('./pages/brands/brands.module').then(m => m.BrandsModule), data: { breadcrumb: 'Brands' } },

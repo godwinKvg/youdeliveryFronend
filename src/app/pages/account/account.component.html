@@ -5,6 +5,10 @@
                 <mat-icon matListIcon class="mat-icon-sm">{{link.icon}}</mat-icon>
                 <a matLine [routerLink]="link.href" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">{{ link.name }}</a>
             </mat-list-item>
+            <mat-list-item >              
+                <mat-icon matListIcon class="mat-icon-sm">power_settings_new</mat-icon>
+                <a matLine href (click)="logout()" >Déconnecter</a>
+            </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="account-content" ngClass.gt-sm="p-left">

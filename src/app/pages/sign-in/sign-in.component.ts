@@ -25,10 +25,10 @@ export class SignInComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
-      localStorage.setItem('isLoggedInClient',"false");
-      localStorage.setItem('isLoggedInAdmin',"false");
-      localStorage.setItem('isLoggedPartenaire',"false");
     }
+    localStorage.setItem('isLoggedInClient',"false");
+    localStorage.setItem('isLoggedInAdmin',"false");
+    localStorage.setItem('isLoggedPartenaire',"false");
     this.loginForm = this.formBuilder.group({
       'email': ['', Validators.compose([Validators.required, emailValidator])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])] 
@@ -64,7 +64,8 @@ export class SignInComponent implements OnInit {
         switch (data.roles[0]) {
           case "CLIENT_ROLE":
             localStorage.setItem('isLoggedInClient',"true");
-            this.router.navigate(['/account']);
+            window.location.reload();
+            this.router.navigate(['/']);
             break;
           case "LIVREUR_ROLE":
             localStorage.setItem('isLoggedInAdmin',"true");
@@ -78,6 +79,9 @@ export class SignInComponent implements OnInit {
         
       },
       err => {
+           window.location.reload();
+          this.snackBar.open('Identifiant incorrect!', '×', { panelClass: 'danger', verticalPosition: 'top', duration: 3000 });
+
         this.errorMessage = err.error.message;
         console.log(err);
         this.isLoginFailed = true;

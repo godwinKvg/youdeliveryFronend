@@ -30,7 +30,8 @@
             </span>
           <span fxShow="false" fxShow.gt-xs fxLayoutAlign="center center"><mat-icon class="mat-icon-sm">call</mat-icon>  Hotline: (+221) 77 888 21 90 </span>
             <span fxShow="false" fxShow.gt-sm>Bienvenu chez youdelivery!</span>
-            <app-top-menu></app-top-menu>    
+            <app-top-menu *ngIf="!isLoggedInClient"></app-top-menu>    
+            <app-top-menu2 *ngIf="isLoggedInClient"></app-top-menu2> 
         </mat-toolbar-row>  
         <mat-toolbar-row fxLayoutAlign="space-between center" class="logo-toolbar theme-container">
             
@@ -55,32 +56,33 @@
             
                 <div fxLayoutAlign="center center" [@.disabled]="true">
                    <button mat-button [matMenuTriggerFor]="cartMenu" #cartMenuTrigger="matMenuTrigger" class="flex-row-button">
-                        
-                        <!--<span *ngIf="appService.Data.totalCartCount > 0" class="cart-items-count">{{appService.Data.totalCartCount}}</span>-->
-                      <!--   <div fxLayout="column" fxLayoutAlign="center center" fxShow="false" fxShow.gt-xs class="top-cart">
-                            <span>Reservez en ligne</span>
+                    <mat-icon class="mat-icon-lg">shopping_cart</mat-icon>
+                       <span *ngIf="appService.Data.totalCartCount > 0" class="cart-items-count">{{appService.Data.totalCartCount}}</span>
+                        <div fxLayout="column" fxLayoutAlign="center center" fxShow="false" fxShow.gt-xs class="top-cart">
+                            <span>Mon panier</span>
                            <span *ngIf="appService.Data.totalCartCount > 0">
-                                <bdi>{{appService.Data.totalCartCount}} item<span *ngIf="appService.Data.totalCartCount > 1">s</span> - 
+                                <bdi>{{appService.Data.totalCartCount}} élément<span *ngIf="appService.Data.totalCartCount > 1">s</span> - 
                                     $<span>{{appService.Data.totalPrice | number : '1.2-2'}}</span>
                                 </bdi>
                             </span>
-                        
-                        </div>-->
-                     <!--   <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>-->
+                            
+                        </div>
+                       <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
                     </button>
-                    <a mat-button  routerLink="sign-in">
+                  <!--  <a mat-button  routerLink="sign-in">
                         <mat-icon class="mat-icon-lg">shopping_cart</mat-icon>
-                         <span fxShow="false" fxShow.gt-sm>Reservez en ligne</span> <!--<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>-->
-                    </a>
-                   <!--  <mat-menu #cartMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="top-menu-dropdown cart-dropdown">
+                         <span fxShow="false" fxShow.gt-sm>Reservez en ligne</span> <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+                    </a>-->
+                
+                     <mat-menu #cartMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="top-menu-dropdown cart-dropdown">
                         <ng-template matMenuContent>
                             <span (mouseleave)="cartMenuTrigger.closeMenu()" class="d-block">
                                 <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
-                                    <b><span>{{appService.Data.totalCartCount}} ITEM<span *ngIf="appService.Data.totalCartCount > 1">S</span></span></b>
-                                    <b><a [routerLink]="['/cart']" class="text-muted">VIEW CART</a></b>
+                                    <b><span>{{appService.Data.totalCartCount}} élément<span *ngIf="appService.Data.totalCartCount > 1">s</span></span></b>
+                                    <b><a [routerLink]="['/cart']" class="text-muted">Voir Cart</a></b>
                                 </div>
                                 <div class="divider mt-1"></div>
-                                <div *ngIf="appService.Data.totalCartCount == 0" class="py-1 text-muted text-center">You have no items in your shopping cart.</div>
+                                <div *ngIf="appService.Data.totalCartCount == 0" class="py-1 text-muted text-center">Vous n'avez aucun article dans votre panier.</div>
                                 <mat-list>
                                     <mat-list-item *ngFor="let product of appService.Data.cartList">                                   
                                         <h3 matLine class="text-muted"> {{product.name}} </h3>
@@ -104,7 +106,7 @@
                                         <button mat-mini-fab color="warn" (click)="clear();stopClickPropagate($event)" matTooltip="Clear All" matTooltipPosition="after">
                                             <mat-icon>remove_shopping_cart</mat-icon>
                                         </button>
-                                        <a [routerLink]="['/checkout']" mat-mini-fab color="primary" matTooltip="Checkout" matTooltipPosition="before">
+                                        <a [routerLink]="['/account/commande']" mat-mini-fab color="primary" matTooltip="Commander" matTooltipPosition="before">
                                             <mat-icon>check</mat-icon>
                                         </a>
                                     </div>
@@ -134,7 +136,7 @@
                                 </button> 
                             </form>
                         </ng-template>
-                    </mat-menu>-->
+                    </mat-menu>
                 </div> 
             </div> 
         </mat-toolbar-row>

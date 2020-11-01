@@ -12,15 +12,15 @@ export class BannersComponent implements OnInit {
 
   ngOnInit() { }
 
-  public getBanner(index){
+ /* public getBanner(index){
     return this.banners[index];
-  }
+  }*/
 
-  public getBgImage(index){
+  /*public getBgImage(index){
     let bgImage = {
       'background-image': index != null ? "url(" + this.banners[index].image + ")" : "url(https://via.placeholder.com/600x400/ff0000/fff/)"
     };
     return bgImage;
-  } 
+  } */
 
 }

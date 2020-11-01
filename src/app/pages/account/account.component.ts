@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-account',
@@ -13,17 +14,17 @@ export class AccountComponent implements OnInit {
     { name: 'Tableau de bord ', href: 'dashboard', icon: 'dashboard' },
     { name: 'Informations du compte', href: 'information', icon: 'info' },
     { name: 'Addresses', href: 'addresses', icon: 'location_on' },
-    { name: 'Envoi de colis', href: 'checkout', icon: 'shopping_cart' }, 
-    { name: 'Livrer chez moi', href: 'commande', icon: 'shopping_basket' }, 
+    { name: 'Passer une commande', href: 'checkout', icon: 'shopping_cart' }, 
     { name: 'Historiques des commandes', href: 'orders', icon: 'add_shopping_cart' },  
-    { name: 'Déconnecter', href: '/sign-in', icon: 'power_settings_new' },    
+     
   ];
-  constructor(public router:Router) { }
+  constructor(public router:Router,public tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
     if(window.innerWidth < 960){
       this.sidenavOpen = false;
     };
+   // window.location.reload();
   }
 
   @HostListener('window:resize')
@@ -40,5 +41,9 @@ export class AccountComponent implements OnInit {
       }                
     });
   }
-
+  logout() {
+    this.tokenStorageService.signOut();
+    localStorage.setItem('isLoggedInClient',"false");
+    window.location.reload();
+  }
 }

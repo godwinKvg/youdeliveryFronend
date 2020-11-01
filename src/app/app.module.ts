@@ -31,6 +31,7 @@ import { TokenStorageService } from './_services/token-storage.service';
 import { AppInterceptor } from './theme/utils/app-interceptor';
 import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
+import { TopMenu2Component } from './theme/components/top-menu2/top-menu2.component';
 
 
 @NgModule({
@@ -54,7 +55,10 @@ import { FooterComponent } from './theme/components/footer/footer.component';
     SidenavMenuComponent,
     BreadcrumbComponent,
     OptionsComponent,
-    FooterComponent    
+    FooterComponent,
+    TopMenu2Component,
+   
+ 
   ], 
   providers: [
     AppSettings,

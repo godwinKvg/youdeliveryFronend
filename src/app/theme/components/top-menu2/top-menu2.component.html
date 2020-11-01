@@ -1,0 +1,43 @@
+<div class="top-menu">    
+
+    <a mat-button  href="https://www.facebook.com/morymoussa.camara">
+        <mat-icon class="mat-icon-sm account-icon">facebook</mat-icon>  <!--<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>-->
+    </a>
+    <a mat-button  href="https://www.facebook.com/morymoussa.camara">
+        <mat-icon class="mat-icon-sm account-icon">facebook</mat-icon>  <!--<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>-->
+    </a>
+    <a mat-button  href="https://www.facebook.com/morymoussa.camara">
+        <mat-icon class="mat-icon-sm account-icon">facebook</mat-icon>  <!--<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>-->
+    </a>
+    
+    <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger">
+        <mat-icon class="mat-icon-sm account-icon">person</mat-icon> <span fxShow="false" fxShow.gt-sm>Mon compte</span> <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+    </a>
+    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown account">
+        <span (mouseleave)="accountMenuTrigger.closeMenu()">
+            <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info">                   
+                <img src="assets/images/others/user.jpg" alt="user-image" width="50">
+                <p> Camara<br> <small>emilio_v <span *ngIf="settings.rtl">&rlm;</span>(152<mat-icon class="mat-icon-xs">star</mat-icon>)</small></p>
+            </div>
+            <div class="divider"></div>
+            <a mat-menu-item routerLink="/account/dashbord"> 
+                <mat-icon class="mat-icon-sm">settings</mat-icon>
+                <span>profil</span> 
+            </a>
+            <a mat-menu-item routerLink="/account/checkout"> 
+                <mat-icon class="mat-icon-sm">shopping_cart</mat-icon>
+                <span>Passer une commande</span> 
+            </a>
+            <a mat-menu-item routerLink="/"> 
+                <mat-icon class="mat-icon-sm">help</mat-icon>
+                <span>Help</span> 
+            </a>
+            <div class="divider"></div>
+            <a mat-menu-item href (click)="logout()"> 
+                <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
+                <span>Sign Out</span> 
+            </a>
+        </span>
+    </mat-menu>    
+
+</div>  
