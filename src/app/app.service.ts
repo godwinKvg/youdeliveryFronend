@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Category, Product } from './app.models';
@@ -13,8 +13,12 @@ export class Data {
                 public totalCartCount: number) { }
 }
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable()
 export class AppService {
+    private product_api = 'http://localhost:8080/api/products';
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -25,7 +29,24 @@ export class AppService {
     )
     public url = "assets/data/";
     constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
-    
+
+    createProduct(product: Object): Observable<Object> {
+        return this.http.post(`${this.product_api}`, product);
+      }
+     
+    public getProductsList(): Observable<Product[]> {
+        return this.http.get<Product[]>(`${this.product_api}`);
+      }
+    public getProductByID(id): Observable<Product>{
+        return this.http.get<Product>(`${this.product_api}/${id}`);
+    }
+
+    public updateProduct(id: number, value: any): Observable<Object>{
+        return this.http.put(`${this.product_api}/${id}`, value);
+    }
+    deleteProduct(id: number): Observable<any> {
+        return this.http.delete(`${this.product_api}/${id}`, { responseType: 'text' });
+      }_
     public getCategories(): Observable<Category[]>{
         return this.http.get<Category[]>(this.url + 'categories.json');
     }

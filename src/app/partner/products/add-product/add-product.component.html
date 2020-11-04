@@ -1,7 +1,7 @@
 <div class="p-1">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title>{{(id) ? 'Editer' : 'Ajouter nouveau'}} Menu</mat-card-title>
+       <!----> <mat-card-header>
+            <mat-card-title>{{(id) ? 'Edit' : 'Add New'}} Product</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
@@ -15,16 +15,76 @@
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Nom</mat-label>
                                 <input matInput formControlName="name" required>
-                                <mat-error *ngIf="form.controls.name.errors?.required">Nom est obligatoire</mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('minlength')">Nom avoir au moins 4 charactères</mat-error>
+                                <mat-error *ngIf="form.controls.name.errors?.required">Nom est obligatoire </mat-error>
+                                <mat-error *ngIf="form.controls.name.hasError('minlength')">Nom est trop court, minimum  4 characteres</mat-error>
                             </mat-form-field>
                         </div> 
-                        
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Prix</mat-label>
-                                <input matInput formControlName="price">
-                                <mat-error *ngIf="form.controls.price.errors?.required">Prix est obligatoire</mat-error>
+                                <mat-label>Categorie</mat-label>
+                                <mat-select formControlName="categoryId" required>
+                                    <mat-option *ngFor="let cat of categories" [value]="cat.id">
+                                        <span>{{cat.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Categorie est obligatoire</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Prix normal</mat-label>
+                                <input matInput formControlName="oldPrice">
+                                <mat-error *ngIf="form.controls.oldPrice.errors?.required">Prix normal est obligatoire </mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nouveau prix</mat-label>
+                                <input matInput formControlName="newPrice" required>
+                                <mat-error *ngIf="form.controls.newPrice.errors?.required">Prix de vente</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Discount</mat-label>
+                                <input matInput formControlName="discount" type="number"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Availibility Count</mat-label>
+                                <input matInput formControlName="availibilityCount" type="number"> 
+                            </mat-form-field>
+                        </div> 
+
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Couleur</mat-label>
+                                <mat-select formControlName="color" multiple  (selectionChange)="onColorSelectionChange($event)">
+                                    <mat-select-trigger>{{selectedColors}}</mat-select-trigger>
+                                    <mat-option *ngFor="let color of colors" [value]="color">
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                                            <span>{{color}}</span>
+                                            <mat-icon [style.color]="color">fiber_manual_record</mat-icon>
+                                        </div> 
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Taille</mat-label>
+                                <mat-select formControlName="size" multiple>
+                                    <mat-option *ngFor="let size of sizes" [value]="size">
+                                        <span>{{size}}</span>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Poids</mat-label>
+                                <input matInput formControlName="weight" type="number"> 
                             </mat-form-field>
                         </div> 
 
@@ -37,13 +97,18 @@
                        
 
 
-                        <div fxFlex="100" class="mt-2 text-center w-100">
-                            <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+                        <div fxFlex="100" class="mt-2 text-center w-100" *ngIf="!edit" >
+                            <button mat-raised-button color="primary" type="submit">Enregistré</button>
+                        </div>
+                        <div fxFlex="100" class="mt-2 text-center w-100" *ngIf="edit">
+                            <button mat-raised-button color="primary" type="submit">Modifié</button>
                         </div>
                     </div>
                 </div>
             </form>
         </mat-card-content>
        
+       
+        
     </mat-card>
 </div>

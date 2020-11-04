@@ -17,20 +17,20 @@
         <span (mouseleave)="accountMenuTrigger.closeMenu()">
             <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info">                   
                 <img src="assets/images/others/user.jpg" alt="user-image" width="50">
-                <p> Camara<br> <small>emilio_v <span *ngIf="settings.rtl">&rlm;</span>(152<mat-icon class="mat-icon-xs">star</mat-icon>)</small></p>
+                <p> {{currentUser.fullname}}<br> <small>emilio_v <span *ngIf="settings.rtl">&rlm;</span>(152<mat-icon class="mat-icon-xs">star</mat-icon>)</small></p>
             </div>
             <div class="divider"></div>
-            <a mat-menu-item routerLink="/account/dashbord"> 
-                <mat-icon class="mat-icon-sm">settings</mat-icon>
+            <a mat-menu-item routerLink="/account/dashboard"> 
+                <mat-icon class="mat-icon-sm">person</mat-icon>
                 <span>profil</span> 
             </a>
             <a mat-menu-item routerLink="/account/checkout"> 
                 <mat-icon class="mat-icon-sm">shopping_cart</mat-icon>
                 <span>Passer une commande</span> 
             </a>
-            <a mat-menu-item routerLink="/"> 
-                <mat-icon class="mat-icon-sm">help</mat-icon>
-                <span>Help</span> 
+            <a mat-menu-item routerLink="/account/information"> 
+                <mat-icon class="mat-icon-sm">settings</mat-icon>
+                <span>changer mot de passe</span> 
             </a>
             <div class="divider"></div>
             <a mat-menu-item href (click)="logout()"> 

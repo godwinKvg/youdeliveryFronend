@@ -64,8 +64,20 @@ export class ProductDetailComponent implements OnInit {
   }
 
   public getProductById(id){
-    this.appService.getProductById(id).subscribe(data=>{
+    this.appService.getProductByID(id).subscribe(data=>{
       this.product = data;
+     /* this.image = data.images[0].medium;
+      this.zoomImage = data.images[0].big;*/
+       this.getProductByID(id);
+      setTimeout(() => { 
+        this.config.observer = true;
+       // this.directiveRef.setIndex(0);
+      });
+    });
+  }
+  public getProductByID(id){
+    this.appService.getProductById(id).subscribe(data=>{
+     // this.product = data;
       this.image = data.images[0].medium;
       this.zoomImage = data.images[0].big;
       setTimeout(() => { 
@@ -74,7 +86,6 @@ export class ProductDetailComponent implements OnInit {
       });
     });
   }
-
   public selectImage(image){
     this.image = image.medium;
     this.zoomImage = image.big;

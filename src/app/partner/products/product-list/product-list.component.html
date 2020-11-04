@@ -1,13 +1,14 @@
 <div fxLayout="row wrap">
-    <div *ngFor="let product of products | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="p-1">
+    <div *ngFor="let product of productes | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="p-1">
         <mat-card class="product-item text-center">
             <mat-chip-list *ngIf="product.discount">
                 <mat-chip color="warn" selected="true">{{product.discount}}% OFF</mat-chip>
             </mat-chip-list> 
-            <img [src]="product.images[0].medium" alt=""> 
+            <img [src]="products[0].images[0].medium" alt=""> 
             <h4 class="category text-muted">{{ ( appService.Data.categories | filterById : product.categoryId )?.name }}</h4>                                                                     
-            <div class="title text-truncate">
+            <div class="title text-truncate" >
                 {{product.name}}
+                
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
                 <div fxLayout="column" fxLayoutAlign="center start">
@@ -26,10 +27,10 @@
     </div>
 </div>
 
-<div *ngIf="products.length > 0" fxLayout="row wrap">
+<!--<div *ngIf="products.length > 0" fxLayout="row wrap">
     <div fxFlex="100" class="p-1"> 
         <mat-card class="p-0 text-center">           
             <pagination-controls class="product-pagination" autoHide="true" maxSize="5" (pageChange)="onPageChanged($event)"></pagination-controls>
         </mat-card>
     </div>
-</div>
+</div>-->
