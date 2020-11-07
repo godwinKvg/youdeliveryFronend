@@ -58,13 +58,14 @@ export class SignInComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         console.log(data);
         this.isLoginFailed = false;
+        // 
         this.isLoggedIn = true;
         localStorage.setItem('role',data.roles[0]);
         
         switch (data.roles[0]) {
           case "CLIENT_ROLE":
             localStorage.setItem('isLoggedInClient',"true");
-            window.location.reload();
+        //    window.location.reload();
             this.router.navigate(['/']);
             break;
           case "LIVREUR_ROLE":

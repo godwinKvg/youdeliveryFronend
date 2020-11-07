@@ -7,6 +7,7 @@ import { ProductZoomComponent } from './product-zoom/product-zoom.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { emailValidator } from 'src/app/theme/utils/app-validators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,6 +23,8 @@ export class ProductDetailComponent implements OnInit {
   public zoomImage: any;
   private sub: any;
   public form: FormGroup;
+  photoServiceUrl =environment.photoServiceUrl;
+
 
   constructor(public appService:AppService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public formBuilder: FormBuilder) { }
 
@@ -78,8 +81,8 @@ export class ProductDetailComponent implements OnInit {
   public getProductByID(id){
     this.appService.getProductById(id).subscribe(data=>{
      // this.product = data;
-      this.image = data.images[0].medium;
-      this.zoomImage = data.images[0].big;
+      this.image = this.photoServiceUrl + this.product.photo1;
+      this.zoomImage = this.photoServiceUrl + this.product.photo1;
       setTimeout(() => { 
         this.config.observer = true;
        // this.directiveRef.setIndex(0);
@@ -115,7 +118,7 @@ export class ProductDetailComponent implements OnInit {
 
   public openZoomViewer(){
     this.dialog.open(ProductZoomComponent, {
-      data: this.zoomImage,
+      data: this.photoServiceUrl + this.product.photo1,
       panelClass: 'zoom-dialog'
     });
   }
