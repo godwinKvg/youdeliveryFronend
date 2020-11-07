@@ -32,7 +32,6 @@
             <mat-error *ngIf="billingForm.controls.city.errors?.required">La ville est obligatoire </mat-error>
           </mat-form-field>
         </div>
-     
         <div fxFlex="100" fxFlex.gt-sm="60" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
               <mat-label>Addresse</mat-label>
@@ -56,13 +55,6 @@
               <mat-error *ngIf="recipientForm.controls.fullname.errors?.required">Veuillez entré le nom complet</mat-error>
           </mat-form-field>
         </div>
-      
-        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
-          <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="username" required>
-          </mat-form-field>
-        </div>
         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
               <mat-label>Téléphone</mat-label>
@@ -81,7 +73,6 @@
             <mat-error *ngIf="recipientForm.controls.city.errors?.required">La ville est obligatoire</mat-error>
           </mat-form-field>
         </div>
-     
         <div fxFlex="100" fxFlex.gt-sm="60" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
               <mat-label>Addresse</mat-label>
@@ -96,7 +87,7 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="paymentForm" label="Information du colis">
+  <mat-step [stepControl]="paymentForm" label="Infos du colis">
     <form [formGroup]="paymentForm">
       <div fxLayout="row wrap">      
         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
@@ -138,10 +129,21 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="payementForm" label="Paiement">
+    <form [formGroup]="payementForm" class="p-2">
+      <mat-radio-group formControlName="payementMethod" fxLayout="column" fxLayoutAlign="center" required name="methods">
+        <mat-radio-button *ngFor="let method of payementMethods" color="primary" [value]="method" class="mt-1"><b>{{method.name}}</b> {{method.desc}}</mat-radio-button>
+      </mat-radio-group> 
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>navigate_before</mat-icon></button>
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>navigate_next</mat-icon></button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step label="Review Order">    
     <div fxLayout="row wrap">
       <div fxFlex="100" class="p-1">
-        <h3 class="text-muted">Informations du colis</h3>
+        <h3 class="text-muted">Infos du colis</h3>
         <div class="divider"></div>
         <div class="mat-table review-order-table">
           <div class="mat-header-row">
@@ -153,9 +155,9 @@
           <div  class="mat-row">
             <div class="mat-cell">{{paymentForm.controls.type.value}}</div>
             <div class="mat-cell">{{paymentForm.controls.poids.value}}</div>
-            <div class="mat-cell"><p class="py-1">{{paymentForm.controls.deliveryMethode.value['name']}} <span class="text-muted">{{paymentForm.controls.deliveryMethode.value['desc']}}</span></p>
+            <div class="mat-cell"><p class="py-1">{{paymentForm.controls.deliveryMethode.value['name']}} </p>
             </div>      
-            <div class="mat-cell text-muted"> {{paymentForm.controls.commentaire.value}} </div>
+            <div class="mat-cell"> {{paymentForm.controls.commentaire.value}} </div>
           </div>
         </div>
       </div> 
@@ -196,10 +198,6 @@
           <p>{{recipientForm.controls.fullname.value}}</p>
         </div>
         <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
-          <p class="text-muted">Email:</p>
-          <p>{{recipientForm.controls.username.value}}</p>
-        </div>
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
           <p class="text-muted">Téléphone:</p>
           <p>{{recipientForm.controls.phoneNumber.value}}</p>
         </div>
@@ -214,9 +212,10 @@
     </div>
     <div fxLayout="row">
       <div fxFlex="100" class="p-1">
-        <h3 class="text-muted mt-2">Payment information</h3>
+        <h3 class="text-muted mt-2">Mode de Paiment</h3>
         <div class="divider"></div>
-        <p class="py-1"><span class="text-muted mr-1">Card number:</span><span>XXX-XXX-XXX-7224</span></p>
+        
+        <p class="py-1"><span class="text-muted mr-1">{{payementForm.controls.payementMethod.value['name']}}</span></p>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="p-1"> 
@@ -299,13 +298,6 @@
         </div>
         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="username" required>
-              <mat-error *ngIf="recipientForm.controls.username.errors?.required">Email est obligatoire</mat-error>
-          </mat-form-field>
-        </div>
-        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
-          <mat-form-field appearance="outline" class="w-100">
               <mat-label>Téléphone</mat-label>
               <input matInput placeholder="Téléphone" formControlName="phoneNumber" required>
               <mat-error *ngIf="recipientForm.controls.phoneNumber.errors?.required">Numéro est obligatoire</mat-error>
@@ -380,6 +372,17 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="payementForm" label="Paiement">
+    <form [formGroup]="payementForm" class="p-2">
+      <mat-radio-group formControlName="payementMethod" fxLayout="column" fxLayoutAlign="center" required name="methods">
+        <mat-radio-button *ngFor="let method of payementMethods" color="primary" [value]="method" class="mt-1"><b>{{method.name}}</b> {{method.desc}}</mat-radio-button>
+      </mat-radio-group> 
+      <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1"> 
+        <button mat-mini-fab matStepperPrevious color="primary" matTooltip="Back" matTooltipPosition="before" class="mr-1"><mat-icon>navigate_before</mat-icon></button>
+        <button mat-mini-fab matStepperNext color="primary" matTooltip="Next" matTooltipPosition="after"><mat-icon>navigate_next</mat-icon></button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step label="Review Order">    
     <div fxLayout="row wrap">
       <div fxFlex="100" class="p-1">
@@ -397,7 +400,7 @@
             <div class="mat-cell">{{paymentForm.controls.poids.value}}</div>
             <div class="mat-cell"><p class="py-1">{{paymentForm.controls.deliveryMethode.value['name']}} <span class="text-muted">{{paymentForm.controls.deliveryMethode.value['desc']}}</span></p>
             </div>      
-            <div class="mat-cell text-muted"> {{paymentForm.controls.commentaire.value}} </div>
+            <div class="mat-cell"> {{paymentForm.controls.commentaire.value}} </div>
           </div>
         </div>
       </div> 
@@ -439,10 +442,6 @@
         <p>{{recipientForm.controls.fullname.value}} </p>
       </div>
       <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
-        <p class="text-muted">Email:</p>
-        <p>{{recipientForm.controls.username.value}}</p>
-      </div>
-      <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="p-1">
         <p class="text-muted">Téléphone:</p>
         <p>{{recipientForm.controls.phoneNumber.value}}</p>
       </div>
@@ -460,7 +459,7 @@
       <div fxFlex="100" class="p-1">
         <h3 class="text-muted mt-2">Payment information</h3>
         <div class="divider"></div>
-        <p class="py-1"><span class="text-muted mr-1">Card number:</span><span>XXX-XXX-XXX-7224</span></p>
+        <p class="py-1"><span class="text-muted mr-1">{{payementForm.controls.payementMethod.value['name']}}</span></p>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="p-1"> 

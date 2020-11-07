@@ -23,26 +23,33 @@ export class HomeComponent implements OnInit {
   public onSaleProducts: Array<Product>;
   public topRatedProducts: Array<Product>;
   public newArrivalsProducts: Array<Product>;
-
+  public allProducts: Array<Product>;
 
   constructor(public appService:AppService) { }
 
   ngOnInit() {
     this.getBanners();
-    this.getProducts("featured");
+    this.getProducts();
     this.getBrands();
   }
 
-  public onLinkClick(e){
+  /*public onLinkClick(e){
     this.getProducts(e.tab.textLabel.toLowerCase()); 
-  }
+  }*/
 
-  public getProducts(type){
+  /*public getProducts(type){
     if(type == "featured" ){
       this.appService.getProducts("featured").subscribe(data=>{
         this.featuredProducts = data;      
       }) 
     }
+   
+  }*/
+  
+  public getProducts(){
+      this.appService.getProductsList().subscribe(data=>{
+        this.allProducts = data;      
+      })  
    
   }
 

@@ -89,7 +89,7 @@
                                         <p matLine class="text-muted">
                                             <bdi>{{product.cartCount}} x ${{product.newPrice | number : '1.2-2'}}</bdi>
                                         </p>
-                                        <img  [src]="product.images[0].small" alt="image">
+                                        <img  [src]="p[1].images[0].small" alt="image">
                                         <button mat-icon-button color="warn" class="remove" (click)="remove(product);stopClickPropagate($event)" matTooltip="Remove" matTooltipPosition="before">
                                             <mat-icon class="mat-icon-sm">close</mat-icon>
                                         </button>

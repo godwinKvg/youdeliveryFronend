@@ -16,12 +16,14 @@ export class CheckoutComponent implements OnInit {
   billingForm: FormGroup;
   recipientForm: FormGroup;
   paymentForm: FormGroup;
+  payementForm: FormGroup;
   countries = [];
   months = [];
   years = [];
   poids = [];
   typesColis = [];
   deliveryMethods = [];
+  payementMethods =  [];
   grandTotal = 0;
   currentUser: any;
   constructor(public appService:AppService, public formBuilder: FormBuilder,private token: TokenStorageService) { }
@@ -37,6 +39,8 @@ export class CheckoutComponent implements OnInit {
     this.typesColis = this.appService.getTypeColis();
     this.poids = this.appService.getPoids();
     this.deliveryMethods = this.appService.getDeliveryMethods();
+    this.payementMethods = this.appService.getPaymentMethods();
+    console.log(this.deliveryMethods + " "+this.payementMethods);
     this.billingForm = this.formBuilder.group({
       fullname: [ this.currentUser.fullname, Validators.required],
       username: [this.currentUser.username, Validators.required],
@@ -46,10 +50,12 @@ export class CheckoutComponent implements OnInit {
     });
     this.recipientForm = this.formBuilder.group({
       fullname: [ '', Validators.required],
-      username: '',
       phoneNumber: ['', Validators.required],
       city: ['', Validators.required],
       address: ['', Validators.required]
+    });
+    this.payementForm = this.formBuilder.group({
+      payementMethod: ['this.payementMethods[0]', Validators.required]
     });
     this.paymentForm = this.formBuilder.group({
       type: ['', Validators.required],
