@@ -32,6 +32,9 @@ export class ProductListComponent implements OnInit {
      
     });
   }
+  public reloadData(){
+    this.getProducts();
+  }
   public getAllProducts(){
     this.appService.getProducts("featured").subscribe(data=>{
       this.products = data; 
@@ -52,9 +55,7 @@ export class ProductListComponent implements OnInit {
     (window.innerWidth < 1280) ? this.viewCol = 33.3 : this.viewCol = 25;
   }
  
-  public reloadData(){
-    this.appService.getProductsList();
-  }
+
   public remove(product:any){  
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -65,17 +66,16 @@ export class ProductListComponent implements OnInit {
     }); 
     dialogRef.afterClosed().subscribe(dialogResult => { 
       if(dialogResult){
-       
-        //  this.appService.deleteProduct(index);
-          this.appService.deleteProduct(product.id)
-          .subscribe(
-            data => {
-              console.log(data);
-              //this.reloadData();
-              window.location.reload();
-            },
-            error => console.log(error));
-         
+        const index: number = this.productes.indexOf(product);
+        if (index !== -1) {
+          this.productes.splice(index, 1);  
+        } 
+        this.appService.deleteProduct(product.id).subscribe(
+          data => {
+            console.log(data);
+            this.reloadData();
+          },
+          error => console.log(error));
       } 
     }); 
   }

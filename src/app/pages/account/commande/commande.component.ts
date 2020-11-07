@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { Product } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
@@ -22,9 +23,11 @@ export class CommandeComponent implements OnInit {
   deliveryMethods = [];
   grandTotal = 0;
   currentUser: any;
+  p:Array<Product> = [];
   constructor(public appService:AppService, public formBuilder: FormBuilder,private token: TokenStorageService) { }
 
   ngOnInit() {    
+    this.appService.getProducts("featured").subscribe(data =>{this.p =data;});
     this.currentUser = this.token.getUser();
     this.appService.Data.cartList.forEach(product=>{
       this.grandTotal += product.cartCount*product.newPrice;

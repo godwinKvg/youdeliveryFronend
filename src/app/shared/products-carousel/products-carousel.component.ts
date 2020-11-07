@@ -18,11 +18,13 @@ export class ProductsCarouselComponent implements OnInit {
   @Input('products') products: Array<Product> = [];
   public config: SwiperConfigInterface = {};
   public settings: Settings;
+  public p: Array<Product> =[];
   constructor(public appSettings:AppSettings, public appService:AppService, public dialog: MatDialog, private router: Router) { 
     this.settings = this.appSettings.settings;
   }
 
-  ngOnInit() { }
+  ngOnInit() { this.appService.getProducts("featured").subscribe(data=>{ this.p = data;
+      console.log(this.p);}); }
   
   ngAfterViewInit(){
     this.config = {

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { Category, Product } from 'src/app/app.models';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-add-product',
@@ -18,8 +19,9 @@ export class AddProductComponent implements OnInit {
   private sub: any;
   public id:any;
   public edit: boolean = false;
+  public currentUser :any;
   product: Product = new Product();
-  constructor(public appService:AppService, public formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,private router: Router ) { }
+  constructor(public token: TokenStorageService, public appService:AppService, public formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,private router: Router ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({ 
@@ -35,6 +37,7 @@ export class AddProductComponent implements OnInit {
       "weight": null,
       "categoryId": [null, Validators.required ]   
     }); 
+    this.currentUser = this.token.getUser();
     this.getCategories();
     this.sub = this.activatedRoute.params.subscribe(params => {  
       if(params['id']){
@@ -80,7 +83,8 @@ export class AddProductComponent implements OnInit {
     this.product.color = this.form.get('color').value;
     this.product.description = this.form.get('description').value;
     this.product.discount = this.form.get('discount').value;
-     console.log(this.form);
+    this.product.idPartner = this.currentUser.id;
+     console.log(this.form + ""+ this.currentUser.id);
      if(!this.edit){
     this.appService
     .createProduct(this.product).subscribe(data => {

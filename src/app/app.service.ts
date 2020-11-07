@@ -426,9 +426,15 @@ export class AppService {
 
     public getDeliveryMethods(){
         return [
-            { value: 'free', name: 'Free Delivery', desc: '$0.00 / Delivery in 7 to 14 business Days' },
-            { value: 'standard', name: 'Standard Delivery', desc: '$7.99 / Delivery in 5 to 7 business Days' },
-            { value: 'express', name: 'Express Delivery', desc: '$29.99 / Delivery in 1 business Days' }
+            { value: 'normal', name: 'Livraison normal', desc: '$7.99 / Delivery in 5 to 7 business Days' },
+            { value: 'express', name: 'Livraison express', desc: '$29.99 / Delivery in 1 business Days' }
+        ]
+    }
+    public getPaymentMethods(){
+        return [
+            { value: 'espèces', name: 'Paiement par espèces', desc: 'Payer sur place' },
+            { value: 'orange', name: 'Paiment par orange money', desc: 'Tel:+221773445976' },
+            { value: 'free', name: 'Paiemant free money', desc: 'Tel:+764825025' }
         ]
     }
 

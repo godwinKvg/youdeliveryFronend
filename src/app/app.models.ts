@@ -21,4 +21,5 @@ export class Product {
      ratingsCount: number;
      cartCount: number;
      ratingsValue: number;
+     idPartner: number;
 }

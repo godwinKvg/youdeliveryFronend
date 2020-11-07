@@ -121,14 +121,14 @@
         <div class="divider"></div>
         <div class="mat-table review-order-table">
           <div class="mat-header-row">
-            <div class="mat-header-cell">Product</div>
-            <div class="mat-header-cell">Name</div>
-            <div class="mat-header-cell">Unit Price</div>      
-            <div class="mat-header-cell">Quantity</div>
+            <div class="mat-header-cell">Produit</div>
+            <div class="mat-header-cell">Nom</div>
+            <div class="mat-header-cell">Prix unitaire</div>      
+            <div class="mat-header-cell">Quantité</div>
             <div class="mat-header-cell">Total</div>
           </div>
           <div *ngFor="let product of appService.Data.cartList" class="mat-row">
-            <div class="mat-cell"><img [src]="product.images[0].small"></div>
+            <div class="mat-cell"><img [src]="p[1].images[0].small"></div>
             <div class="mat-cell">{{product.name}}</div>
             <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>      
             <div class="mat-cell text-muted"> {{product.cartCount}} </div>
@@ -321,14 +321,14 @@
         <div class="divider"></div>
         <div class="mat-table review-order-table">
           <div class="mat-header-row">
-            <div class="mat-header-cell">Product</div>
-            <div class="mat-header-cell">Name</div>
-            <div class="mat-header-cell">Unit Price</div>      
-            <div class="mat-header-cell">Quantity</div>
+            <div class="mat-header-cell">Produit</div>
+            <div class="mat-header-cell">Nom</div>
+            <div class="mat-header-cell">Prix unitaire</div>      
+            <div class="mat-header-cell">Quantité</div>
             <div class="mat-header-cell">Total</div>
           </div>
           <div *ngFor="let product of appService.Data.cartList" class="mat-row">
-            <div class="mat-cell"><img [src]="product.images[0].small"></div>
+            <div class="mat-cell"><img [src]="p[0].images[0].small"></div>
             <div class="mat-cell">{{product.name}}</div>
             <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>      
             <div class="mat-cell text-muted"> 1 </div>

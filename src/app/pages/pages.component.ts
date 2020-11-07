@@ -20,6 +20,7 @@ export class PagesComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) sidenav:any;
 
   public settings: Settings;
+  public p: Array<Product>=[];
   constructor(public appSettings:AppSettings, 
               public appService:AppService, 
               public sidenavMenuService:SidenavMenuService,
@@ -29,10 +30,12 @@ export class PagesComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
+    this.appService.getProducts("featured").subscribe(data=>{
+      this.p = data;
+    });
     this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
     if(localStorage.getItem('isLoggedInClient')== "true"){
        this.isLoggedInClient = true;
-       console.log("loy def fi mory "+ localStorage.getItem('isLoggedInClient'));
 
     }
   } 
