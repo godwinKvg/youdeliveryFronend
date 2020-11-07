@@ -58,6 +58,7 @@ export class SignInComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         console.log(data);
         this.isLoginFailed = false;
+        // 
         this.isLoggedIn = true;
         localStorage.setItem('role',data.roles[0]);
         
