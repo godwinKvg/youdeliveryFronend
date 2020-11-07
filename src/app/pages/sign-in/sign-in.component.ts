@@ -65,7 +65,7 @@ export class SignInComponent implements OnInit {
         switch (data.roles[0]) {
           case "CLIENT_ROLE":
             localStorage.setItem('isLoggedInClient',"true");
-            window.location.reload();
+        //    window.location.reload();
             this.router.navigate(['/']);
             break;
           case "LIVREUR_ROLE":

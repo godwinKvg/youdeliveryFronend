@@ -19,6 +19,7 @@ const httpOptions = {
 @Injectable()
 export class AppService {
     private product_api = 'http://localhost:8080/api/products';
+
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -32,6 +33,26 @@ export class AppService {
 
     createProduct(product: Object): Observable<Object> {
         return this.http.post(`${this.product_api}`, product);
+      }
+
+      uploadPhotosProduct(files: File[], photoServerAdr : string) {
+
+        return this.http.post<string[]>(photoServerAdr, this.getFormData(files))
+      }
+
+      private getFormData(files: File[]): FormData {
+
+        const formData: FormData = new FormData();
+
+        console.log('getFormData files object :',files);
+
+        
+        files.forEach(file => formData.append('photo', file));
+
+        console.log('formData :',formData);
+  
+        return formData;
+  
       }
      
     public getProductsList(): Observable<Product[]> {

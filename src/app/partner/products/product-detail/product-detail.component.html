@@ -5,7 +5,7 @@
                 <mat-chip color="warn" selected="true">{{product?.discount}}% OFF</mat-chip>
             </mat-chip-list>
             <button mat-icon-button (click)="openZoomViewer()" fxHide="false" fxHide.gt-md><mat-icon>fullscreen</mat-icon></button>
-            <img *ngIf="image" [src]="image" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave($event)"/>
+            <img *ngIf="image" [src]="photoServiceUrl+product?.photo1" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave($event)"/>
         </mat-card>  
         <div class="small-carousel"> 
             <div class="swiper-container" [swiper]="config">

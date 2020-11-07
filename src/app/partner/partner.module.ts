@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 const config: InputFileConfig = {
   fileAccept: '*'
+
 };
 
 import { PartnerComponent } from './partner.component';

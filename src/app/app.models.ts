@@ -10,6 +10,10 @@ export class Product {
      name: string;
      images: Array<any>;
      oldPrice: number;
+     photo1?:string;
+     photo2?:string;
+     photo3?:string;
+     photo4?:string;     
      newPrice: number;
      discount: number;
      description: string;
