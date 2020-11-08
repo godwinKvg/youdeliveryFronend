@@ -53,6 +53,9 @@ export class SignInComponent implements OnInit {
     console.log(this.loginForm.value.email);
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
       data => {
+
+        console.log('actual user:',data);
+
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         this.roles = this.tokenStorage.getUser().roles;
@@ -60,9 +63,9 @@ export class SignInComponent implements OnInit {
         this.isLoginFailed = false;
         // 
         this.isLoggedIn = true;
-        localStorage.setItem('role',data.roles[0]);
+        localStorage.setItem('role',data.roles[0].name);
         
-        switch (data.roles[0]) {
+        switch (data.roles[0].name) {
           case "CLIENT_ROLE":
             localStorage.setItem('isLoggedInClient',"true");
         //    window.location.reload();

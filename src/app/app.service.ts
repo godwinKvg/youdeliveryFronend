@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Category, Product } from './app.models';
+import { Category, Colis, Commande, Product } from './app.models';
 
 export class Data {
     constructor(public categories: Category[],
@@ -19,6 +19,8 @@ const httpOptions = {
 @Injectable()
 export class AppService {
     private product_api = 'http://localhost:8080/api/products';
+    private api_baseUrl = 'http://localhost:8080/api/';
+
 
     public Data = new Data(
         [], // categories
@@ -444,6 +446,14 @@ export class AppService {
     public getYears(){
         return [ "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" ]
     }
+
+    createOrder(order: Commande) {
+        return this.http.post(`${this.api_baseUrl}`+'order/', order);
+      }
+
+      createColis(colis: Colis) {
+        return this.http.post(`${this.api_baseUrl}`+'colis/', colis);
+      }
 
     public getDeliveryMethods(){
         return [

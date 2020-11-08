@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { Colis } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
@@ -30,6 +32,9 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {    
     this.currentUser = this.token.getUser();
+
+    console.log('current user :',this.currentUser);
+
     this.appService.Data.cartList.forEach(product=>{
       this.grandTotal += product.cartCount*product.newPrice;
     });
@@ -65,12 +70,49 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  createColisFromForm(){
+    let colis: Colis = new Colis();
+
+   // console.log('payementForm :',this.payementForm.value);
+
+    colis.user = this.currentUser;
+    colis.modePaiement = this.payementForm.value.payementMethod.name;
+    colis.typeColis = this.paymentForm.value.type;
+    colis.villeDepart = this.billingForm.value.city.name;
+    colis.adressDepart = this.billingForm.value.address;
+    colis.villeDestination = this.recipientForm.value.city.name;
+    colis.poids = this.paymentForm.value.poids;
+    colis.telephoneDestinataire = this.recipientForm.value.phoneNumber;
+    colis.nomDestinataire = this.recipientForm.value.fullname;
+    colis.adressDestinataire = this.recipientForm.value.city.name;
+
+    return colis;
+    
+
+  }
+
   public placeOrder(){
+
+    let colis : Colis = this.createColisFromForm();
+
+    console.log('Colis :', colis);
+
+    this.appService.createColis(colis).subscribe(
+      (c : Colis) => {
+        console.log('successfully saved colis :',c);
+        
     this.horizontalStepper._steps.forEach(step => step.editable = false);
     this.verticalStepper._steps.forEach(step => step.editable = false);
     this.appService.Data.cartList.length = 0;    
     this.appService.Data.totalPrice = 0;
     this.appService.Data.totalCartCount = 0;
+
+      },
+      (e : HttpErrorResponse)=>{
+        console.log('error while saving colis :',e);
+      }
+    )
+
 
   }
 
